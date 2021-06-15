@@ -4,12 +4,12 @@ import {useState} from 'react';
 
 function App() {
 
-  const [items, setItems] = useState({});
+  const [items, setItems] = useState([]);
   const [text, setText] = useState('');
 
   function addItem(text){
-    const todos = [...items];
-    todos.unshift({text: text});
+    const todos = [{text: text}, ...items];
+  
     setItems([...todos]);
   }
 
@@ -29,15 +29,12 @@ function App() {
       <h1>Todos</h1>
 
       <form onSubmit={handleSubmit}>
-      </form>
       <input type="text" onChange={handleChange} value={text} />
+      </form>
 
       <div>
         {
-          items.map((item, index) => {
-            return <li key={index}>{item}</li>
-            
-          } )
+          items.map((item, index) => <li key={index}>{item.text}</li> )
         }
       </div>
     </div>
